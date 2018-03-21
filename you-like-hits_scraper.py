@@ -11,7 +11,7 @@ import re
 import ConfigParser
 
 # Read username and password from config file
-settings_file = "apikeys.txt"
+settings_file = "config.txt"
 config = ConfigParser.ConfigParser()
 config.readfp(open(settings_file))
 
