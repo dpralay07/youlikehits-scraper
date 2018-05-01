@@ -11,7 +11,7 @@ import re
 import ConfigParser
 
 # Read username and password from config file
-settings_file = "apikeys.txt"
+settings_file = "config.txt"
 config = ConfigParser.ConfigParser()
 config.readfp(open(settings_file))
 
@@ -48,7 +48,7 @@ with requests.Session() as s:
         # Get BlackMarket Tweet-IDs
         import re
 
-        with open('tweetID_points.csv','a+') as fw:
+        with open('customer11_tweetID_points.csv','a+') as fw:
             for i, urls in enumerate(rtURLs):
                 iframecontent = s.get("https://youlikehits.com/" + urls).content
                 soup = BeautifulSoup(iframecontent, 'html.parser')
