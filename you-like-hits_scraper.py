@@ -9,9 +9,11 @@ from bs4 import BeautifulSoup
 import urllib
 import re
 import ConfigParser
+import datetime
+import sys
 
 # Read username and password from config file
-settings_file = "config.txt"
+settings_file = "/home/hridoyd/youlikehits-scraper/config.txt"
 config = ConfigParser.ConfigParser()
 config.readfp(open(settings_file))
 
@@ -21,13 +23,15 @@ payload = {
     'pass': config.get('Credentials', 'password')
 }
 
-
+print "****** YOULIKEHITS PARSER WORKING ******"
 # Use 'with' to ensure the session context is closed after use.
 with requests.Session() as s:
     # login to youlikehits using payload parameters
     p = s.post('https://youlikehits.com/login.php', data=payload)
     count = 0
-    while count < 9999:
+    while count < 999:
+        if count == 999:
+            sys.exit(0)
         retweetPageContent = s.get("https://youlikehits.com/retweets.php?show=" + str(count)).content
 
         # Find all tweet points    
@@ -48,7 +52,7 @@ with requests.Session() as s:
         # Get BlackMarket Tweet-IDs
         import re
 
-        with open('customer11_tweetID_points.csv','a+') as fw:
+        with open('/home/hridoyd/youlikehits-scraper/datas/customer_' + datetime.datetime.now().strftime("%Y%m%d%H%M%S") +'_tweetID_points.csv','a+') as fw:
             for i, urls in enumerate(rtURLs):
                 iframecontent = s.get("https://youlikehits.com/" + urls).content
                 soup = BeautifulSoup(iframecontent, 'html.parser')
