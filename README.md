@@ -1,4 +1,4 @@
-# Scrape YouLikeHits web page for insights (Presently working only for Twitter Retweets)
+# Scrape YouLikeHits web page for insights (Presently working only for Twitter Retweets and Twitter Followers)
 
 ## Usage:
 > python you-like-hits_scraper.py
